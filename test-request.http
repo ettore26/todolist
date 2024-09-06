@@ -1,0 +1,46 @@
+### Generate JWT token
+POST http://localhost:8080/token
+Authorization: Basic user password
+
+> {%
+    let token = response.body;
+    client.global.set("accessToken", token);
+
+%}
+
+### get all todos from user
+GET http://localhost:8080/api/todos
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+### get todos by id
+GET http://localhost:8080/api/todos/1
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+### create new todo
+POST http://localhost:8080/api/todos
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "name": "New Todo",
+  "description": "New Todo Description"
+}
+
+> {%
+    let todoId = response.body.id;
+    client.global.set("todoId", todoId);
+
+%}
+
+### update existing todo
+PUT http://localhost:8080/api/todos/{{todoId}}
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "name": "New Todo Updated",
+  "description": "New Todo Description Updated",
+  "completed": true
+}
