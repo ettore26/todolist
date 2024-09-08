@@ -1,4 +1,4 @@
-# TODO LIST
+# TODO LIST - 7 hours challenge
 
 To build and run locally using docker:
 
